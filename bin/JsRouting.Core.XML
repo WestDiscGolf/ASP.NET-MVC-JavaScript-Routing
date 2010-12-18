@@ -1,0 +1,604 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>JsRouting.Core</name>
+    </assembly>
+    <members>
+        <member name="T:JsRouting.Core.RouteSourceExt">
+            <summary>
+            Extension methods for <see cref="T:IRouteSource"/>
+            </summary>
+        </member>
+        <member name="M:JsRouting.Core.RouteSourceExt.ToRouteCollection(JsRouting.Core.IRouteSource)">
+            <summary>
+            Generates a route collection from a route source
+            </summary>
+            <param name="source">Route source from which to generate a route collection</param>
+            <returns>Route collection</returns>
+        </member>
+        <member name="T:JsRouting.Core.Output">
+            <summary>
+            Object representing the output formatter
+            </summary>
+        </member>
+        <member name="T:JsRouting.Core.IJavaScriptSource">
+            <summary>
+            Object with a JavaScript representation
+            </summary>
+        </member>
+        <member name="F:JsRouting.Core.Output.beginLine">
+            <summary>
+            Beginning line for output
+            </summary>
+        </member>
+        <member name="F:JsRouting.Core.Output.endLine">
+            <summary>
+            Ending line for output
+            </summary>
+        </member>
+        <member name="F:JsRouting.Core.Output.routeReader">
+            <summary>
+            Route reader
+            </summary>
+        </member>
+        <member name="F:JsRouting.Core.Output.controllerReader">
+            <summary>
+            Controller action reader
+            </summary>
+        </member>
+        <member name="F:JsRouting.Core.Output.additions">
+            <summary>
+            Additional JavaScript values
+            </summary>
+        </member>
+        <member name="M:JsRouting.Core.Output.#ctor(JsRouting.Core.RouteReader,JsRouting.Core.ControllerReader,System.Collections.Generic.IEnumerable{JsRouting.Core.IJavaScriptAddition})">
+            <summary>
+            Initializes a new instance of the <see cref="T:JsRouting.Core.Output"/> class.
+            </summary>
+            <param name="routeReader">The route reader.</param>
+            <param name="controllerReader">Controller action reader.</param>
+        </member>
+        <member name="M:JsRouting.Core.Output.ToJavaScript">
+            <summary>
+            Gets the JavaScript output 
+            </summary>
+            <returns>JavaScript output for route generation</returns>
+        </member>
+        <member name="P:JsRouting.Core.Output.ManagerJs">
+            <summary>
+            Gets the output for the manager JS embedded resource
+            </summary>
+        </member>
+        <member name="T:JsRouting.Core.RouteSource">
+            <summary>
+            Route source
+            </summary>
+        </member>
+        <member name="T:JsRouting.Core.IRouteSource">
+            <summary>
+            Route source
+            </summary>
+        </member>
+        <member name="P:JsRouting.Core.IRouteSource.Routes">
+            <summary>
+            Gets the routes used in the generation of JavaScript routing definitions
+            </summary>
+        </member>
+        <member name="M:JsRouting.Core.RouteSource.Map(System.Collections.Generic.IList{System.Tuple{System.String,System.Web.Routing.Route}})">
+            <summary>
+            Maps the routes
+            </summary>
+            <param name="routes">Route list</param>
+        </member>
+        <member name="P:JsRouting.Core.RouteSource.Routes">
+            <summary>
+            Gets the routes used in the generation of JavaScript routing definitions
+            </summary>
+        </member>
+        <member name="T:JsRouting.Core.RouteReader">
+            <summary>
+            Route source that outputs the acceptable route definitions
+            </summary>
+        </member>
+        <member name="M:JsRouting.Core.RouteReader.#ctor(System.Collections.Generic.IEnumerable{JsRouting.Core.IRouteSource},System.Collections.Generic.IEnumerable{JsRouting.Core.IRouteInterceptor})">
+            <summary>
+            Initializes a new instance of the <see cref="T:JsRouting.Core.RouteReader"/> class.
+            </summary>
+            <param name="routeSources">The route sources.</param>
+            <param name="interceptors">Route interceptors</param>
+        </member>
+        <member name="P:JsRouting.Core.RouteReader.Definitions">
+            <summary>
+            Gets the route definitions from the route sources
+            </summary>
+        </member>
+        <member name="T:JsRouting.Core.DocumentationReader">
+            <summary>
+            Documentation reader
+            </summary>
+        </member>
+        <member name="F:JsRouting.Core.DocumentationReader.members">
+            <summary>
+            All the members declared in the documentation file
+            </summary>
+        </member>
+        <member name="M:JsRouting.Core.DocumentationReader.#ctor(System.Reflection.Assembly)">
+            <summary>
+            Initializes a new instance of the <see cref="T:JsRouting.Core.DocumentationReader"/> class.
+            </summary>
+            <param name="assembly">The assembly from which to read documentation</param>
+        </member>
+        <member name="M:JsRouting.Core.DocumentationReader.ParameterDescription(System.Reflection.MethodInfo,System.String)">
+            <summary>
+            Gets the parameter description of a type
+            </summary>
+            <param name="method">Method value</param>
+            <param name="parameter">Parameter name</param>
+            <returns>Parameter description</returns>
+        </member>
+        <member name="M:JsRouting.Core.DocumentationReader.MethodDescription(System.Reflection.MethodInfo)">
+            <summary>
+            Gets the parameter description of a type
+            </summary>
+            <param name="method">Method value</param>
+            <returns>Method documentation description</returns>
+        </member>
+        <member name="M:JsRouting.Core.DocumentationReader.FindElement(System.Reflection.MethodInfo)">
+            <summary>
+            Finds the comment element
+            </summary>
+            <param name="method">Method to find</param>
+            <returns>Method comment XML</returns>
+        </member>
+        <member name="M:JsRouting.Core.DocumentationReader.AddTo(System.Text.StringBuilder,System.Collections.Generic.IEnumerable{System.Type})">
+            <summary>
+            Adds parameter info to the string builder
+            </summary>
+            <param name="builder">String builder to add to</param>
+            <param name="paramTypes">Parameter types</param>
+            <returns>String builder with additional items</returns>
+        </member>
+        <member name="T:JsRouting.Core.DictionaryExt">
+            <summary>
+            Extension methods for route dictionary
+            </summary>
+        </member>
+        <member name="M:JsRouting.Core.DictionaryExt.MapRoute(System.Collections.Generic.IList{System.Tuple{System.String,System.Web.Routing.Route}},System.String,System.String,System.Object,System.Object)">
+            <summary>
+            Maps a route to the dictionary
+            </summary>
+            <param name="routeDictionary">Route dictionary to map route</param>
+            <param name="name">Route name</param>
+            <param name="pattern">URL pattern</param>
+            <param name="defaults">Default values</param>
+            <param name="constraints">Constraints on the route</param>
+            <returns>Route formed by the call to MapRoute</returns>
+        </member>
+        <member name="M:JsRouting.Core.DictionaryExt.AddTo(System.Collections.Generic.IList{System.Tuple{System.String,System.Web.Routing.Route}},System.Web.Routing.RouteCollection)">
+            <summary>
+            Adds the routes from a route dictionary source to the route collection
+            </summary>
+            <param name="routeDictionary">Route dictionary source</param>
+            <param name="collection">Route collection for routes</param>
+            <returns>Route collection with the routes added</returns>
+        </member>
+        <member name="T:JsRouting.Core.ActionNameInterceptor">
+            <summary>
+            Interceptor that replaces the name of the controller action when a ActionName attribute is applied
+            </summary>
+        </member>
+        <member name="T:JsRouting.Core.IControllerActionInterceptor">
+            <summary>
+            Controller action interceptor
+            </summary>
+        </member>
+        <member name="M:JsRouting.Core.IControllerActionInterceptor.Intercept(JsRouting.Core.ControllerActionDefinition)">
+            <summary>
+            Controller action interceptor
+            </summary>
+            <param name="definition">Controller action definition</param>
+            <returns>Value indicating whether to accept the controller action</returns>
+        </member>
+        <member name="F:JsRouting.Core.ActionNameInterceptor.actionNameAttribute">
+            <summary>
+            Action name attribute type
+            </summary>
+        </member>
+        <member name="M:JsRouting.Core.ActionNameInterceptor.Intercept(JsRouting.Core.ControllerActionDefinition)">
+            <summary>
+            Controller action interceptor that changes the action name when specified by attribute
+            </summary>
+            <param name="definition">Controller action definition</param>
+            <returns>
+            Value indicating whether to accept the controller action
+            </returns>
+        </member>
+        <member name="T:JsRouting.Core.IJavaScriptAddition">
+            <summary>
+            Additional JavaScript added to the route configuration
+            </summary>
+        </member>
+        <member name="T:JsRouting.Core.ControllerReader">
+            <summary>
+            Controller action reader
+            </summary>
+        </member>
+        <member name="F:JsRouting.Core.ControllerReader.actionResult">
+            <summary>
+            Action result type
+            </summary>
+        </member>
+        <member name="F:JsRouting.Core.ControllerReader.nullableType">
+            <summary>
+            Nullable generic type
+            </summary>
+        </member>
+        <member name="F:JsRouting.Core.ControllerReader.docReaders">
+            <summary>
+            Documentation readers
+            </summary>
+        </member>
+        <member name="M:JsRouting.Core.ControllerReader.#ctor(StructureMap.IContainer,System.Collections.Generic.IEnumerable{JsRouting.Core.IControllerActionInterceptor})">
+            <summary>
+            Initializes a new instance of the <see cref="T:JsRouting.Core.ControllerReader"/> class.
+            </summary>
+            <param name="container">The dependency container.</param>
+            <param name="interceptors">Controller action interceptors</param>
+        </member>
+        <member name="M:JsRouting.Core.ControllerReader.FindReader(System.Reflection.Assembly)">
+            <summary>
+            Finds a documentation reader for the assembly
+            </summary>
+            <param name="assembly">Assembly to find documentation</param>
+            <returns>Documentation reader</returns>
+        </member>
+        <member name="P:JsRouting.Core.ControllerReader.Definitions">
+            <summary>
+            Gets the controller actions
+            </summary>
+        </member>
+        <member name="T:JsRouting.Core.ControllerReader.SummaryInterceptor">
+            <summary>
+            Interceptor that adds a description
+            </summary>
+        </member>
+        <member name="F:JsRouting.Core.ControllerReader.SummaryInterceptor.findReader">
+            <summary>
+            Function that finds a reader
+            </summary>
+        </member>
+        <member name="M:JsRouting.Core.ControllerReader.SummaryInterceptor.#ctor(System.Func{System.Reflection.Assembly,JsRouting.Core.DocumentationReader})">
+            <summary>
+            Initializes a new instance of the <see cref="T:JsRouting.Core.ControllerReader.SummaryInterceptor"/> class.
+            </summary>
+            <param name="findReader">The find reader function</param>
+        </member>
+        <member name="M:JsRouting.Core.ControllerReader.SummaryInterceptor.Intercept(JsRouting.Core.ControllerActionDefinition)">
+            <summary>
+            Controller action interceptor
+            </summary>
+            <param name="definition">Controller action definition</param>
+            <returns>
+            Value indicating whether to accept the controller action
+            </returns>
+        </member>
+        <member name="T:JsRouting.Core.ControllerReader.ParameterInterceptor">
+            <summary>
+            Interceptor that adds parameter info
+            </summary>
+        </member>
+        <member name="F:JsRouting.Core.ControllerReader.ParameterInterceptor.findReader">
+            <summary>
+            Function to find documentation reader
+            </summary>
+        </member>
+        <member name="M:JsRouting.Core.ControllerReader.ParameterInterceptor.#ctor(System.Func{System.Reflection.Assembly,JsRouting.Core.DocumentationReader})">
+            <summary>
+            Initializes a new instance of the <see cref="T:JsRouting.Core.ControllerReader.ParameterInterceptor"/> class.
+            </summary>
+            <param name="docReaders">The doc readers.</param>
+        </member>
+        <member name="F:JsRouting.Core.ControllerReader.ParameterInterceptor.serializer">
+            <summary>
+            JavaScript serializer
+            </summary>
+        </member>
+        <member name="M:JsRouting.Core.ControllerReader.ParameterInterceptor.Intercept(JsRouting.Core.ControllerActionDefinition)">
+            <summary>
+            Controller action interceptor
+            </summary>
+            <param name="definition">Controller action definition</param>
+            <returns>
+            Value indicating whether to accept the controller action
+            </returns>
+        </member>
+        <member name="T:JsRouting.Core.AssemblyLoader">
+            <summary>
+            Assembly loader
+            </summary>
+        </member>
+        <member name="M:JsRouting.Core.AssemblyLoader.Load(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Gets a container with the loaded dependencies
+            </summary>
+            <param name="assemblies">Assemblies to scan</param>
+            <returns>Container containing various dependencies to form the JavaScript routing definitions</returns>
+        </member>
+        <member name="T:JsRouting.Core.ParameterResult">
+            <summary>
+            Representation of the parameter
+            </summary>
+        </member>
+        <member name="P:JsRouting.Core.ParameterResult.Name">
+            <summary>
+            Gets or sets the parameter name
+            </summary>
+        </member>
+        <member name="P:JsRouting.Core.ParameterResult.Optional">
+            <summary>
+            Gets or sets a value indicating whether the parameter is optional
+            </summary>
+        </member>
+        <member name="P:JsRouting.Core.ParameterResult.DefaultValue">
+            <summary>
+            Gets or sets the default value JavaScript
+            </summary>
+        </member>
+        <member name="P:JsRouting.Core.ParameterResult.Description">
+            <summary>
+            Gets or sets the parameter description
+            </summary>
+        </member>
+        <member name="P:JsRouting.Core.ParameterResult.ParameterInfo">
+            <summary>
+            Gets or sets the parameter metadata
+            </summary>
+        </member>
+        <member name="T:JsRouting.Core.JsConstraintAttribute">
+            <summary>
+            Constraint persisted through JavaScript
+            </summary>
+        </member>
+        <member name="M:JsRouting.Core.JsConstraintAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:JsRouting.Core.JsConstraintAttribute"/> class.
+            </summary>
+            <param name="constraintName">Name of the constraint.</param>
+        </member>
+        <member name="P:JsRouting.Core.JsConstraintAttribute.ConstraintName">
+            <summary>
+            Gets the constraint JavaScript name
+            </summary>
+        </member>
+        <member name="T:JsRouting.Core.RouteConstraintDefinition">
+            <summary>
+            JavaScript constraint definition
+            </summary>
+        </member>
+        <member name="F:JsRouting.Core.RouteConstraintDefinition.ConstraintJs">
+            <summary>
+            Constraint JavaScript representation format
+            </summary>
+        </member>
+        <member name="M:JsRouting.Core.RouteConstraintDefinition.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:JsRouting.Core.RouteConstraintDefinition"/> class.
+            </summary>
+            <param name="parameterName">Constraining Parameter</param>
+            <param name="constraintName">Name of the constraint.</param>
+            <param name="data">JavaScript representation of the data passed to the constraint</param>
+        </member>
+        <member name="M:JsRouting.Core.RouteConstraintDefinition.ToJavaScript">
+            <summary>
+            Creates the initialization JavaScript for the constraint
+            </summary>
+            <returns>Constraint JavaScript</returns>
+        </member>
+        <member name="P:JsRouting.Core.RouteConstraintDefinition.Data">
+            <summary>
+            Gets or sets the data passed to the constraint
+            </summary>
+        </member>
+        <member name="P:JsRouting.Core.RouteConstraintDefinition.ConstraintName">
+            <summary>
+            Gets or sets the name of the constraint
+            </summary>
+        </member>
+        <member name="P:JsRouting.Core.RouteConstraintDefinition.ParameterName">
+            <summary>
+            Gets or sets the parameter name for the constraint
+            </summary>
+        </member>
+        <member name="T:JsRouting.Core.NonActionInterceptor">
+            <summary>
+            Interceptor that rejects methods with non-action attribute
+            </summary>
+        </member>
+        <member name="F:JsRouting.Core.NonActionInterceptor.nonActionAttribute">
+            <summary>
+            Non-action attribute type
+            </summary>
+        </member>
+        <member name="M:JsRouting.Core.NonActionInterceptor.Intercept(JsRouting.Core.ControllerActionDefinition)">
+            <summary>
+            Controller action interceptor that removes method with non-action attribute
+            </summary>
+            <param name="definition">Controller action definition</param>
+            <returns>
+            Value indicating whether to accept the controller action
+            </returns>
+        </member>
+        <member name="T:JsRouting.Core.IRouteInterceptor">
+            <summary>
+            Route interceptor before the route is output to JavaScript
+            </summary>
+        </member>
+        <member name="M:JsRouting.Core.IRouteInterceptor.Intercept(JsRouting.Core.RouteDefinition)">
+            <summary>
+            Intercepts the route definition before the route is output to JavaScript
+            </summary>
+            <param name="definition">Route definition to manipulate</param>
+            <returns>Value indicating whether to add the route after the interception</returns>
+        </member>
+        <member name="T:JsRouting.Core.ControllerActionDefinition">
+            <summary>
+            Controller action definition
+            </summary>
+        </member>
+        <member name="F:JsRouting.Core.ControllerActionDefinition.jsPattern">
+            <summary>
+            JavaScript registration
+            </summary>
+        </member>
+        <member name="M:JsRouting.Core.ControllerActionDefinition.#ctor(System.Reflection.MethodInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:JsRouting.Core.ControllerActionDefinition"/> class.
+            </summary>
+            <param name="method">The method</param>
+        </member>
+        <member name="M:JsRouting.Core.ControllerActionDefinition.ToJavaScript">
+            <summary>
+            Gets the JavaScritpt registration for the controller action
+            </summary>
+            <returns>Controller action JavaScript</returns>
+        </member>
+        <member name="M:JsRouting.Core.ControllerActionDefinition.AppendComment(System.Text.StringBuilder,JsRouting.Core.ParameterResult)">
+            <summary>
+            Appends a parameter comment to the string builder
+            </summary>
+            <param name="sb">String Builder</param>
+            <param name="param">Parameter to append</param>
+            <returns>String builder with appended comment</returns>
+        </member>
+        <member name="P:JsRouting.Core.ControllerActionDefinition.ActionName">
+            <summary>
+            Gets the name of the controller action.
+            </summary>
+        </member>
+        <member name="P:JsRouting.Core.ControllerActionDefinition.ControllerName">
+            <summary>
+            Gets the name of the controller for the action.
+            </summary>
+        </member>
+        <member name="P:JsRouting.Core.ControllerActionDefinition.Method">
+            <summary>
+            Gets the method for the action.
+            </summary>
+        </member>
+        <member name="P:JsRouting.Core.ControllerActionDefinition.Parameters">
+            <summary>
+            Gets a list of parameters
+            </summary>
+        </member>
+        <member name="P:JsRouting.Core.ControllerActionDefinition.Description">
+            <summary>
+            Gets or sets the method description
+            </summary>
+        </member>
+        <member name="T:JsRouting.Core.RouteDefinition">
+            <summary>
+            JavaScript representation of the route
+            </summary>
+        </member>
+        <member name="F:JsRouting.Core.RouteDefinition.mapRoute">
+            <summary>
+            Route registration pattern
+            </summary>
+        </member>
+        <member name="M:JsRouting.Core.RouteDefinition.#ctor(System.Web.Routing.Route)">
+            <summary>
+            Initializes a new instance of the <see cref="T:JsRouting.Core.RouteDefinition"/> class.
+            </summary>
+            <param name="route">The route.</param>
+        </member>
+        <member name="M:JsRouting.Core.RouteDefinition.ToString">
+            <summary>
+            Gets the JavaScript utilized to define the route
+            </summary>
+            <returns>JavaScript used to to define the route</returns>
+        </member>
+        <member name="M:JsRouting.Core.RouteDefinition.ToJavaScript">
+            <summary>
+            Gets the JavaScript utilized to define the route
+            </summary>
+            <returns>JavaScript used to to define the route</returns>
+        </member>
+        <member name="P:JsRouting.Core.RouteDefinition.Route">
+            <summary>
+            Gets or sets the route used to define the route definition
+            </summary>
+        </member>
+        <member name="P:JsRouting.Core.RouteDefinition.Name">
+            <summary>
+            Gets or sets the route name
+            </summary>
+        </member>
+        <member name="P:JsRouting.Core.RouteDefinition.UrlPattern">
+            <summary>
+            Gets or sets the URL pattern
+            </summary>
+        </member>
+        <member name="P:JsRouting.Core.RouteDefinition.Constraints">
+            <summary>
+            Gets a list of the constraints for the route
+            </summary>
+        </member>
+        <member name="P:JsRouting.Core.RouteDefinition.DefaultValues">
+            <summary>
+            Gets a dictionary of default route values
+            </summary>
+        </member>
+        <member name="T:JsRouting.Core.StringExt">
+            <summary>
+            String extension methods
+            </summary>
+        </member>
+        <member name="M:JsRouting.Core.StringExt.ConcatAll(System.Collections.Generic.IEnumerable{System.String},System.String,System.Boolean)">
+            <summary>
+            Concats all strings into a single string
+            </summary>
+            <param name="strings">Strings to concat together</param>
+            <param name="deliminator">Deliminator between the string values</param>
+            <param name="delimEnd">Flag to indicate if the deliminator should be placed at the end</param>
+            <returns>Composed string</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when <paramref name="strings"/> is null</exception>
+        </member>
+        <member name="M:JsRouting.Core.StringExt.AppendTo(System.String,System.Text.StringBuilder)">
+            <summary>
+            Appends the string to the StringBuilder
+            </summary>
+            <param name="str">String to append</param>
+            <param name="builder">Builder to append to</param>
+            <returns>Original string builder with string appended</returns>
+        </member>
+        <member name="T:JsRouting.Core.RouteConstraintReader">
+            <summary>
+            Route constraint that adds a constraint to the definition if present
+            </summary>
+        </member>
+        <member name="F:JsRouting.Core.RouteConstraintReader.constraintType">
+            <summary>
+            Route constraint type
+            </summary>
+        </member>
+        <member name="F:JsRouting.Core.RouteConstraintReader.attributeType">
+            <summary>
+            JavaScript attribute type
+            </summary>
+        </member>
+        <member name="F:JsRouting.Core.RouteConstraintReader.serializer">
+            <summary>
+            JavaScript serializer
+            </summary>
+        </member>
+        <member name="M:JsRouting.Core.RouteConstraintReader.Intercept(JsRouting.Core.RouteDefinition)">
+            <summary>
+            Intercepts the route definition before the route is output to JavaScript
+            </summary>
+            <param name="definition">Route definition to manipulate</param>
+            <returns>
+            Value indicating whether to add the route after the interception
+            </returns>
+        </member>
+    </members>
+</doc>
