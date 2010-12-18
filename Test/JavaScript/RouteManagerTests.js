@@ -326,3 +326,19 @@ test("mapControllerAction adds action to controllers that returns function", fun
     $.routeManager.mapControllerAction(controller, action, fn);
     same(fn, $.routeManager.controllers[controller][action]);
 });
+
+test("mapControllerAction adds action with different name when action already exists", function () {
+    $.routeManager.mapRoute("{controller}/{action}/{id}", '', {});
+    var controller = 'myController';
+    var action = 'action';
+    var fn = "fn";
+
+    $.routeManager.controllers = {};
+
+    $.routeManager.mapControllerAction(controller, action, fn);
+
+    var fn2 = "fn2"
+    $.routeManager.mapControllerAction(controller, action, fn2);
+    same(fn, $.routeManager.controllers[controller][action]);
+    same(fn2, $.routeManager.controllers[controller][action + "1"]);
+});

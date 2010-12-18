@@ -2,5 +2,5 @@
 /// <reference path="Routing.js" />
 
 $(document).ready(function () {
-    alert($.routeManager.controllers.Home.Index().toUrl());
+    alert($.routeManager.controllers.Account.LogOn().toUrl());
 });

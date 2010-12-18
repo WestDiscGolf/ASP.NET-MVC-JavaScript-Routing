@@ -53,7 +53,7 @@
             /// <summary>Gets the parameters from a URL pattern.</summary>
             /// <param name="pattern" mayBeNull="false" optional="false" type="String" parameterArray="false" integer="false" domElement="false">URL pattern defined by a route.</param>
             /// <returns type="Array" integer="false" domElement="false" mayBeNull="false" elementType="String" elementInteger="false" elementDomElement="false" elementMayBeNull="false">All parameters of the route.</returns>
-            
+
             var params = [];
             $.each(pattern.match(constants.groupParameters) || [], function (i, param) {
                 params[i] = param.replace(constants.beginAndEndTag, '');
@@ -124,7 +124,7 @@
             /// <summary>Gets the route result for the given data values</summary>
             /// <param name="data" mayBeNull="false" optional="false" type="Object" parameterArray="false" integer="false" domElement="false">Data used to format the route by replacing parameters in the route pattern with data values</param>
             /// <returns type="RouteResult" integer="false" domElement="false" mayBeNull="false">Route value object with route URL</returns>
-            
+
             for (var i = 0; i < this.routes.length; i++) {
                 if (this.routes[i].accept(data)) {
                     return this.routes[i].toResult(data);
@@ -142,7 +142,21 @@
             if (!this.controllers[controller]) {
                 this.controllers[controller] = new Object();
             }
-            this.controllers[controller][action] = fn;
+
+            if (this.controllers[controller][action]) {
+                var startsWith = new RegExp('^' + action);
+                var c = 0;
+                $.each(this.controllers[controller], function (name, val) {
+                    if (startsWith.test(name)) {
+                        c++;
+                    }
+                });
+
+                this.controllers[controller][action + c] = fn;
+            }
+            else {
+                this.controllers[controller][action] = fn;
+            }
         }
 
         this.namedAction = function (name, data) {
@@ -164,7 +178,7 @@
 
         var _this = this;
 
-        this.constraints = []; 
+        this.constraints = [];
 
         this.pattern = pattern;
         this.name = '';
@@ -206,9 +220,9 @@
         /// <summary>Result of a route formation</summary>
         /// <param name="r" mayBeNull="false" optional="false" type="Rotue" parameterArray="false" integer="false" domElement="false">Route definition</param>
         /// <param name="data" mayBeNull="false" optional="false" type="Object" parameterArray="false" integer="false" domElement="false">Data used to format the route by replacing parameters in the route pattern with data values</param>
-        
-        var url = $.routeManager.formatUrl(r.pattern, $.extend({}, data, r.defaultValues), r.defaultValues);
 
+        // var url = $.routeManager.formatUrl(r.pattern, data, r.defaultValues);
+        var url = $.routeManager.formatUrl(r.pattern, $.extend({}, r.defaultValues, data), r.defaultValues);
         this.toUrl = function () {
             /// <summary>Gets the URL</summary>
             /// <returns type="String" integer="false" domElement="false" mayByNull="false">URL for the request"</param>
@@ -256,8 +270,14 @@ $.routeManager.constraintTypeDefs.notEmpty = function(param){
                     return data[param] && data[param].length > 0;
                 };
             };
-$.routeManager.mapRoute('HomeC/{id}', 'Default2', {"controller":"Home","action":"Index","id":""}).addConstraint($.routeManager.constraintTypeDefs.notEmpty('id', {}));
 $.routeManager.mapRoute('{controller}/{action}/{id}', 'Default', {"controller":"Home","action":"Index","id":""});
+$.routeManager.mapControllerAction('Home', 'Index', function(additionalData){
+/// <summary></summary>
+ return $.routeManager.action($.extend({controller:"Home", action:"Index"}, additionalData, {})); });
+$.routeManager.mapControllerAction('Home', 'About', function(id, additionalData){
+/// <summary></summary>
+/// <param name="id" mayBeNull="false" optional="false" type="String"></param>
+ return $.routeManager.action($.extend({controller:"Home", action:"About"}, additionalData, {id:id})); });
 $.routeManager.mapControllerAction('Account', 'LogOn', function(additionalData){
 /// <summary></summary>
  return $.routeManager.action($.extend({controller:"Account", action:"LogOn"}, additionalData, {})); });
@@ -286,11 +306,4 @@ $.routeManager.mapControllerAction('Account', 'ChangePassword', function(model, 
 $.routeManager.mapControllerAction('Account', 'ChangePasswordSuccess', function(additionalData){
 /// <summary></summary>
  return $.routeManager.action($.extend({controller:"Account", action:"ChangePasswordSuccess"}, additionalData, {})); });
-$.routeManager.mapControllerAction('Home', 'Index', function(additionalData){
-/// <summary>Website home page</summary>
- return $.routeManager.action($.extend({controller:"Home", action:"Index"}, additionalData, {})); });
-$.routeManager.mapControllerAction('Home', 'About', function(id, additionalData){
-/// <summary>About page</summary>
-/// <param name="id" mayBeNull="false" optional="false" type="String">Some Identifier</param>
- return $.routeManager.action($.extend({controller:"Home", action:"About"}, additionalData, {id:id})); });
 })(jQuery);
