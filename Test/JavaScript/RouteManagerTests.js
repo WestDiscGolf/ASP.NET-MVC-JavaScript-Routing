@@ -342,3 +342,35 @@ test("mapControllerAction adds action with different name when action already ex
     same(fn, $.routeManager.controllers[controller][action]);
     same(fn2, $.routeManager.controllers[controller][action + "1"]);
 });
+
+test("action returns result with get that is chainable", function () {
+    expect(1);
+    $.routeManager.mapRoute('{controller}/{action}', '', { id: 5 });
+
+    $.mockjax({
+        url: '/foo/bar',
+        response: function (data) {
+            start();
+            return "";
+        }
+    });
+
+    stop();
+    equal($.routeManager.action({ controller: "foo", action: "bar" }).get().toUrl(), "/foo/bar");
+});
+
+test("action returns result with post that is chainable", function () {
+    expect(1);
+    $.routeManager.mapRoute('{controller}/{action}', '', { id: 5 });
+
+    $.mockjax({
+        url: '/foo/bar',
+        response: function (data) {
+            start();
+            return "";
+        }
+    });
+
+    stop();
+    equal($.routeManager.action({ controller: "foo", action: "bar" }).post().toUrl(), "/foo/bar");
+});

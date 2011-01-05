@@ -247,6 +247,7 @@
             /// <param name="dataType" mayBeNull="true" optional="true" type="String" parameterArray="false" integer="false" domElement="false">POST request data type</param>
 
             $.post(this.toUrl(), getData(data), success, dataType);
+            return this;
         };
 
         this.get = function (data, success, dataType) {
@@ -256,6 +257,7 @@
             /// <param name="dataType" mayBeNull="true" optional="true" type="String" parameterArray="false" integer="false" domElement="false">GET request data type</param>
 
             $.get(this.toUrl(), getData(data), success, dataType);
+            return this;
         };
     };
 
